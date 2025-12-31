@@ -97,7 +97,7 @@ class Ret:
         self.security_flag = self.raw[0]
         self.iv = self.raw[1:17]
         encrypted_data = self.raw[17:]
-        decrypted_data = AesUtils.decrypt(encrypted_data, self.iv, secret_key)
+        decrypted_data = AesUtils.decrypt(bytes(encrypted_data), bytes(self.iv), secret_key)
 
         sn, sn_ack, code, length = unpack('>IIHH', decrypted_data[:12])
         raw_data = decrypted_data[12:12 + length]
